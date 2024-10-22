@@ -1,7 +1,11 @@
+
 const cells = document.querySelectorAll('.cell');
 const message = document.getElementById('message');
 const resetButton = document.getElementById('reset');
-const modeSelect = document.getElementById('mode'); // Seleção de modo de jogo
+const modeSelect = document.getElementById('mode');
+const modal = document.getElementById('gameOverModal');
+const modalMessage = document.getElementById('gameOverMessage');
+const closeBtn = document.querySelector('.close'); // Seleção de modo de jogo
 let currentPlayer = 'X'; // Jogador inicial
 let board = Array(9).fill(null);
 let gameOver = false;
@@ -11,6 +15,8 @@ let stats = {
     O: 0,
     draw: 0
 };
+localStorage.removeItem('ticTacToeStats');
+resetGame();
 
 // Recuperar o histórico de jogos do localStorage
 if (localStorage.getItem('ticTacToeStats')) {
@@ -34,6 +40,17 @@ const winningCombinations = [
 const winSound = new Audio('win.mp3');
 const drawSound = new Audio('draw.mp3');
 
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
 // Eventos de clique para cada célula
 cells.forEach(cell => {
     cell.addEventListener('click', handleClick);
@@ -49,6 +66,15 @@ function handleClick(e) {
 
     board[index] = currentPlayer;
     e.target.textContent = currentPlayer;
+
+    if (currentPlayer === 'X') {
+        e.target.classList.add('animate-x'); // Adicionar a animação para "X"
+        e.target.innerHTML = '<div class="x">X</div>'; // Mostrar o X com efeito
+    } else {
+        e.target.classList.add('animate-o'); // Adicionar a animação para "O"
+        e.target.innerHTML = '<div class="o">O</div>'; // Mostrar o O com efeito
+    }
+    
 
     if (checkWin()) {
         handleGameOver(`${currentPlayer} venceu!`);
@@ -104,6 +130,8 @@ function computerMove() {
     }
 }
 
+
+
 function checkWin() {
     return winningCombinations.some(combination => {
         return combination.every(index => board[index] === currentPlayer);
@@ -111,17 +139,9 @@ function checkWin() {
 }
 
 function handleGameOver(resultMessage) {
-    message.textContent = resultMessage;
     gameOver = true;
-    const winningCombination = winningCombinations.find(combination => {
-        return combination.every(index => board[index] === currentPlayer);
-    });
-
-    if (winningCombination) {
-        winningCombination.forEach(index => {
-            cells[index].classList.add('winner');
-        });
-    }
+    modalMessage.textContent = resultMessage;
+    modal.style.display = "flex";
 }
 
 function resetGame() {

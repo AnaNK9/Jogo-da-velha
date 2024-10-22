@@ -23,7 +23,6 @@
 
         <button id="reset">Reiniciar Jogo</button>
 
-        <!-- Opções de dificuldade e modo -->
         <div id="settings">
             <label for="mode">Modo de Jogo:</label>
             <select id="mode">
@@ -36,6 +35,17 @@
         <div id="message"></div>
         <div id="stats">Vitórias X: 0 | Vitórias O: 0 | Empates: 0</div>
     </div>
+
+    <!-- Modal de fim de jogo -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="gameOverMessage"></p>
+        </div>
+    </div>
+
+    
+
     <script src="script.js"></script>
 </body>
 </html>
