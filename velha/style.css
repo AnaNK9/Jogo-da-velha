@@ -10,8 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #ffffff;
-
+    background-color: #4a7dff;
 }
 
 .container {
@@ -25,92 +24,22 @@ body {
     gap: 5px;
     margin: 20px auto;
 }
-
+.lee{
+    color: #fffb11;
+  
+}
 .cell {
-    position: relative;
     width: 100px;
     height: 100px;
     background-color: #fff;
-    border: 2px solid #333;
+    border: 5px solid #333;
+    border-radius: 10%;
+    font-size: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     user-select: none;
-}
-.cell .x, .cell .o {
-    font-size: 2em;
-    opacity: 0;
-    position: absolute;
-    transition: opacity 0.3s ease-in;
-}
-.cell.animate-x .x {
-    opacity: 1;
-    animation: drawX 0.5s ease-in-out forwards;
-}
-
-.cell.animate-o .o {
-    opacity: 1;
-    animation: drawO 0.5s ease-in-out forwards;
-}
-
-@keyframes drawX {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes drawO {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.cell .x {
-    color: red;
-}
-
-.cell .o {
-    color: blue;
-}
-
-.cell.animate-x .x {
-    opacity: 1;
-    animation: drawX 0.5s ease-in-out forwards;
-}
-
-.cell.animate-o .o {
-    opacity: 1;
-    animation: drawO 0.5s ease-in-out forwards;
-}
-
-@keyframes drawX {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes drawO {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-
-#settings{
-    padding: 12px;
 }
 
 #reset {
@@ -118,6 +47,9 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #fffb11;
+    border-radius: 10%;
+    border: 5px solid #333;
 }
 
 #message {
@@ -125,39 +57,16 @@ body {
     font-size: 18px;
     font-weight: bold;
 }
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+.winner {
+    background-color: lightgreen;
+    animation: flash 0.5s ease-in-out infinite alternate;
 }
 
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 300px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
+@keyframes flash {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
 }
